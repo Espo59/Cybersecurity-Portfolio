@@ -26,18 +26,18 @@ No external Python libraries are required (uses standard libraries: re, subproce
 ---
 
 # 🛠 Usage
-- 1. Clone the repository:
+- Clone the repository:
 
 git clone https://github.com/yourusername/mac-changer.git
 cd mac-changer
 
-- 2. Configure the script:
+- Configure the script:
 Open change_mac.py and edit the constants at the top:
 
 INTERFACE = "eth0"                 # Your target interface
 NEW_MAC   = "00:11:22:33:44:58"    # Your desired MAC
 
-- 3. Run with sudo:
+- Run with sudo:
 
 sudo python3 change_mac.py
 
