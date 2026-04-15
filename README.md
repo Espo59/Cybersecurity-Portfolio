@@ -1,2 +1,2 @@
 # Cybersecurity-Course
-Easy and simple scripts in Python made during the course in Cybersec. The main VM is Kalilinux, the second one Lubuntu. In most of experiment are usefull software like Bettercap or Wireshark. More VM are: Metasploit, Windows 7 and more.
+This repository contains simple and effective Python scripts developed during a Cybersecurity course. The lab environment consists of a Kali Linux attacker machine and various targets, including Lubuntu, Windows 7, and Metasploitable. These experiments leverage industry-standard tools like Bettercap and Wireshark to analyze network traffic and validate script execution.
