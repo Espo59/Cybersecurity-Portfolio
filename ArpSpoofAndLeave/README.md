@@ -38,8 +38,7 @@ ARP Spoofing is a technique where an attacker sends forged ARP messages onto a l
 
 **Run the attack:**
 
-
-sudo python3 arp_spoofer.py
+`sudo python3 arp_spoofer.py`
 
 Observation: Use Wireshark on the attacker machine to observe the traffic flowing from the victim to the internet through your interface.
 
