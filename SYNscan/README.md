@@ -42,15 +42,15 @@ Bashsudo python3 syn_scan.py <TARGET_IP> [options]
 
 *Examples:*
 
-Bash sudo python3 syn_scan.py 192.168.1.10
+`bash sudo python3 syn_scan.py 192.168.1.10`
 
 *Full scan of all 65k ports:*
 
-sudo python3 syn_scan.py 192.168.1.10 --full
+`sudo python3 syn_scan.py 192.168.1.10 --full`
 
 *Scan only the most common service ports:*
 
-sudo python3 syn_scan.py 192.168.1.10 --common
+`sudo python3 syn_scan.py 192.168.1.10 --common`
 
 ---
 
