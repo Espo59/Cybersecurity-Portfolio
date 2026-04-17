@@ -32,7 +32,7 @@ This ensures that whether you run 1 round or 1,000,000 rounds, the processing ti
 Python 3.6+Running the ScriptClone the repository or download caesar_chiper.py.
 Run the script in your terminal:
 
-`bash python3 caesar_chiper.py`
+`python3 caesar_chiper.py`
 
 **Interactive Menu**
 
