@@ -28,12 +28,12 @@ This project implements a peer-to-peer (P2P) decentralized blockchain network de
 - Flask
 - Requests
 
-`bash pip install Flask requests`
+`pip install Flask requests`
 
 ### Running the Simulation
 The easiest way to test the system is to run the main orchestrator:
 
-`bash python3 main_blockchain.py`
+`python3 main_blockchain.py`
 
 This script will automatically:
 
@@ -54,7 +54,7 @@ You can also run nodes manually in separate terminals:
 
 # Terminal 1
 
-`bash python3 blockchain_8000.py`
+`python3 blockchain_8000.py`
 
 # Terminal 2
 
