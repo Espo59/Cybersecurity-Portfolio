@@ -34,15 +34,6 @@ The server will display:
 
 ```---------listening for connection on port-----------4444```
 
-
-Ecco una proposta di file README.md professionale e ben strutturato per il tuo repository GitHub. È scritto interamente in inglese, come richiesto, ed è ottimizzato per spiegare chiaramente il progetto a chiunque visiti la tua pagina.
-
-Ti ho preparato anche un'anteprima PDF del contenuto per vedere come apparirebbe graficamente.
-
-# Simple Python TCP Socket Communication
-
-A minimalist implementation of a Client-Server architecture using Python's built-in `socket` library. This project demonstrates the fundamental concepts of network programming, specifically the Transmission Control Protocol (TCP).
-
 ---
 
 # 📂 Project Structure
