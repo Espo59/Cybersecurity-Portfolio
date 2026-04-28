@@ -1,74 +1,131 @@
-# Python File Encryption Suite
-A lightweight, secure file encryption and decryption utility based on the Fernet (symmetric encryption) standard. This suite allows you to generate a secure key, encrypt all files within a target directory, and safely restore them.
+# 🔐 Python File Encryption Suite
+
+A lightweight file encryption and decryption utility built using the **Fernet symmetric encryption standard** from the `cryptography` library.
+
+This tool allows secure generation of encryption keys, batch file encryption, and safe restoration of encrypted data.
 
 ---
 
-# 🛠 Features
-- **Symmetric Encryption:** Uses the cryptography library's Fernet implementation (AES-128 in CBC mode with HMAC authentication).
+## 🛠 Features
 
-- **Batch Processing:** Automatically scans a specified directory to encrypt or decrypt all files at once.
+* **Symmetric Encryption (Fernet / AES-based)**
+  Uses authenticated encryption (AES + HMAC) ensuring confidentiality and integrity
 
-- **Security:** Ensures that encrypted data cannot be read or modified without the specific 32-byte base64-encoded key.
+* **Batch File Processing**
+  Automatically encrypts or decrypts all files inside a target directory
 
----
+* **Strong Key Security**
+  Uses a 32-byte base64-encoded key for encryption and decryption
 
-# 📂 File Structure
-*gen_key.py:*
-
-- Generates a unique, secure binary key.
-
-*encrypt.py:*
-
-- Uses the key to transform plaintext files into ciphertext.
-
-*decript.py:*
-
-- Reverts ciphertext files back to their original state using the same key.
+* **Simple Workflow**
+  Split into modular scripts for key generation, encryption, and decryption
 
 ---
 
-# 🚀 Getting Started
+## 📂 Project Structure
 
-*Prerequisites*
+* `gen_key.py`
+  → Generates a secure encryption key (`key.txt`)
 
-You must have the cryptography library installed:
+* `encrypt.py`
+  → Encrypts all files inside the `targets/` directory
 
-`pip install cryptography`
-
-- Generate a Key
-
-First, create your unique encryption key. This will generate a file named key.txt.
-
-`python3 gen_key.py`
-
-**Warning: Never share your key.txt. If you lose this file, you lose access to your encrypted data forever.**
-
-- Encrypt Files
-
-Place the files you wish to protect in a folder named targets. Then run:
-
-`python3 encrypt.py`
-
-The script will read key.txt and overwrite all files in the targets directory with encrypted versions.
-
-- Decrypt Files
-
-To restore your files to their original state:
-
-`python3 decript.py`
-
-The script will use key.txt to verify and decrypt the files. If the key is incorrect or the files are corrupted, the process will fail to prevent data damage.
+* `decript.py`
+  → Decrypts files back to their original state using the same key
 
 ---
 
-# ⚠️ Security Disclaimer
-This project is for educational and personal use.
+## 🚀 Getting Started
 
-Key Loss: There is no "password recovery" mechanism. No key = No data.
+### Prerequisites
 
-Overwriting: The scripts overwrite the original files during the process. It is highly recommended to keep a backup of your data before encrypting.
+Install the required dependency:
+
+```bash id="v4k2xm"
+pip install cryptography
+```
 
 ---
 
-# 📝 License
-This project is open-source and available for research and development purposes.
+### 🔑 Step 1 – Generate Encryption Key
+
+```bash id="c8r3jp"
+python3 gen_key.py
+```
+
+This will create a `key.txt` file containing your encryption key.
+
+> ⚠️ Important: If you lose this key, encrypted data cannot be recovered.
+
+---
+
+### 🔒 Step 2 – Encrypt Files
+
+1. Place files inside the `targets/` directory
+2. Run the encryption script:
+
+```bash id="m2p7ql"
+python3 encrypt.py
+```
+
+All files in the directory will be encrypted using the generated key.
+
+---
+
+### 🔓 Step 3 – Decrypt Files
+
+```bash id="x9n4sv"
+python3 decript.py
+```
+
+This will restore all encrypted files to their original state using `key.txt`.
+
+---
+
+## 📖 How It Works
+
+This tool uses **Fernet symmetric encryption**, which provides:
+
+* AES encryption for confidentiality
+* HMAC authentication for integrity
+* Protection against tampering and unauthorized modifications
+
+Each file is processed in batch mode and securely transformed using the same key.
+
+---
+
+## ⚠️ Security Disclaimer
+
+This project is intended for educational and personal use only.
+
+* 🔑 **Key Loss** → If `key.txt` is lost, data cannot be recovered
+* ⚠️ **File Overwrite** → Original files may be overwritten during processing
+* 💾 **Backup Recommended** → Always backup important data before encryption
+
+---
+
+## 🧪 Learning Objectives
+
+This project demonstrates:
+
+* Practical implementation of symmetric cryptography
+* Secure key management concepts
+* File system automation in Python
+* Batch processing techniques
+* Real-world encryption workflow structure
+
+---
+
+## 📈 Future Improvements
+
+* Add password-based key derivation (PBKDF2 / Argon2)
+* Implement file integrity verification system
+* Add GUI for non-technical users
+* Support selective file encryption
+* Improve logging and audit trail
+
+---
+
+## 📄 License
+
+This project is open-source and intended for educational and research purposes.
