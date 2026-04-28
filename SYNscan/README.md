@@ -1,71 +1,142 @@
-# SYN Scanner - Auto Discovery
-A lightweight and powerful network scanner built with Scapy to perform TCP SYN (Half-Open) scans. 
-This tool includes auto-discovery features via ICMP probing and supports multiple scanning modes to identify OPEN, CLOSED, or FILTERED ports.
+# 🧪 SYN Scanner – Automated Network Discovery Tool
+
+A lightweight network reconnaissance tool built with **Scapy** that performs TCP **SYN (Half-Open) scanning** combined with automatic host discovery via ICMP.
+
+This project is designed for educational purposes to demonstrate port scanning techniques and network response analysis.
 
 ---
 
-# 🚀 Features
-- **Host Discovery:** Verifies host reachability via ICMP echo requests before initiating the port scan.
+## 🚀 Features
 
-- **SYN Scan (Half-Open):** Sends TCP SYN packets and analyzes responses (SYN-ACK/RST) without completing the three-way handshake, reducing the footprint on target application logs.
+### 🌐 Host Discovery
 
-- **Batch Processing:** Scans ports in configurable batches (default: 100) to optimize network resource usage and performance.
-
-- **Detailed Analysis:** Once open ports are identified, the tool performs a secondary detailed pass to confirm their status.
-
-- **Color-coded Output:** Clear terminal output using ANSI colors to quickly distinguish between port states.
+* Uses ICMP Echo Requests to verify host availability before scanning
+* Reduces unnecessary scanning of inactive targets
 
 ---
 
-# 🛠 Requirements
-The program requires Python 3 and the Scapy library.
+### 🔍 TCP SYN (Half-Open) Scan
 
-Bash pip install scapy
-
-Note: Since the script manipulates low-level packets (Raw Sockets), root or administrator privileges are required to run it.
-
----
-
-# 💻 Usage
-Clone the repository and run the script with sudo:
-
-Bashsudo python3 syn_scan.py <TARGET_IP> [options]
-
-
-**Available Options:**
-
-- *quick:* Scans ports 1 through 1024 (Default mode).
-
-- *common:* Scans the top 100 most common ports (e.g., 21, 22, 80, 443, 3306, etc.).
-
-- *full:* Scans the entire port range (1-65535).
-
-*Examples:*
-
-`sudo python3 syn_scan.py 192.168.1.10`
-
-*Full scan of all 65k ports:*
-
-`sudo python3 syn_scan.py 192.168.1.10 --full`
-
-*Scan only the most common service ports:*
-
-`sudo python3 syn_scan.py 192.168.1.10 --common`
+* Sends TCP SYN packets without completing the handshake
+* Analyzes responses to identify port states
+* Minimizes footprint on target-side logs
 
 ---
 
-# 🔍 Scanning Logic
-The script follows the standard Stealth (SYN) Scan protocol:
+### 📦 Batch Processing
 
-SYN Sent: Sends a TCP packet with the S flag.
-
-SYN-ACK Received (0x12): The port is OPEN. The scanner immediately sends a RST to close the connection before it's fully established.
-
-RST-ACK Received (0x14): The port is CLOSED.
-
-No Response / ICMP Unreachable: The port is likely FILTERED by a firewall.
+* Scans ports in configurable batches (default: 100 ports)
+* Improves performance and reduces network load
 
 ---
 
-# ⚠️ Disclaimer
-This tool is developed strictly for educational purposes and Ethical Hacking. Performing scans against targets without explicit authorization is illegal. The author assumes no liability for any misuse of this software.
+### 🧠 Multi-Pass Analysis
+
+* Performs an initial scan to detect open ports
+* Executes a secondary validation pass for confirmation
+
+---
+
+### 🎨 Structured Output
+
+* Color-coded terminal output (OPEN / CLOSED / FILTERED)
+* Clear visualization of scan results
+
+---
+
+## 🛠 Requirements
+
+* Python 3.x
+* Scapy
+
+Install dependency:
+
+```bash id="k8m3vp"
+pip install scapy
+```
+
+> ⚠️ Root privileges are required due to raw socket operations.
+
+---
+
+## 💻 Usage
+
+Run the scanner with administrative privileges:
+
+```bash id="x4n7ql"
+sudo python3 syn_scan.py <TARGET_IP> [options]
+```
+
+---
+
+## ⚙️ Scan Modes
+
+### 🔹 Quick Mode (default)
+
+* Scans ports 1–1024
+
+```bash id="q2m9vz"
+sudo python3 syn_scan.py 192.168.1.10
+```
+
+---
+
+### 🔹 Common Ports Mode
+
+* Scans the most commonly used service ports
+
+```bash id="m7c3xp"
+sudo python3 syn_scan.py 192.168.1.10 --common
+```
+
+---
+
+### 🔹 Full Scan Mode
+
+* Scans the entire TCP port range (1–65535)
+
+```bash id="r8n2ql"
+sudo python3 syn_scan.py 192.168.1.10 --full
+```
+
+---
+
+## 🔍 Scanning Logic
+
+The tool implements a standard **SYN scan (stealth scan)** methodology:
+
+* **SYN Sent** → initiates connection attempt
+* **SYN-ACK Received** → port is OPEN
+* **RST Received** → port is CLOSED
+* **No Response / ICMP Block** → port is FILTERED
+
+If a SYN-ACK is received, the scanner immediately sends a **RST packet** to avoid completing the TCP handshake.
+
+---
+
+## 🧪 Learning Objectives
+
+This project demonstrates:
+
+* TCP/IP handshake mechanics
+* Stealth scanning techniques (SYN scan behavior)
+* Host discovery using ICMP
+* Packet crafting using Scapy
+* Network service enumeration strategies
+* Firewall behavior analysis (filtered vs closed ports)
+
+---
+
+## 🛡 Security & Ethical Notice
+
+This tool is intended strictly for **educational and authorized testing environments**.
+
+* Do not scan networks without explicit permission
+* Unauthorized scanning may violate laws or policies
+* Use only in isolated lab environments (VMs, test networks)
+
+---
+
+## 📄 License
+
+This project is released under the MIT License.
