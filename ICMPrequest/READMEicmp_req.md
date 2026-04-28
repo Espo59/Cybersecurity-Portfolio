@@ -1,53 +1,125 @@
-# ICMP IP Spoofing Tool (Scapy-based)
-This repository contains a Python script designed to demonstrate IP Source Address Spoofing using the ICMP protocol. 
-It was developed as a laboratory experiment to study network protocol vulnerabilities and packet crafting.
+# 🌐 ICMP IP Spoofing Tool (Scapy-based)
+
+This repository contains a Python script that demonstrates **IP source address spoofing** using the ICMP protocol.
+
+It is designed as a controlled laboratory experiment to study network packet crafting and protocol-level vulnerabilities.
 
 ---
 
-# 🔍 How It Works
-Standard network applications rely on the OS kernel to fill in the Source IP address. 
-This script bypasses the standard networking stack using Scapy to craft a "Raw Socket" packet where the source IP is manually defined.
+## 🔍 How It Works
 
-**Layer 3 (IP):** The script injects a fake source IP (SRC_IP) into the IP header.
+This tool bypasses the operating system’s networking stack by using **Scapy** to construct raw packets with custom parameters.
 
-**Layer 4 (ICMP):** An Echo Request (Type 8) is constructed with a custom payload.
+### Packet Structure
 
-Transmission: The packet is injected directly into the network interface.
+* **Layer 3 (IP)**
 
----
+  * Manually sets a forged source IP address (`SRC_IP`)
 
-# 🧪 Educational Objectives
-- **Packet Manipulation:** Learning how to stack network layers (Ethernet/IP/ICMP) manually.
+* **Layer 4 (ICMP)**
 
-- **Security Testing:** Verifying if the local network infrastructure (switches/routers) implements BCP 38 or uRPF (Unicast Reverse Path Forwarding) to detect and drop spoofed packets.
+  * Builds an ICMP Echo Request (Type 8) with a custom payload
 
-- **Traffic Analysis:** Observing the discrepancy between the physical sender and the logical sender in tools like Wireshark.
+* **Transmission**
 
----
-
-# 🛠 Prerequisites
-OS: Kalilinux (requires root privileges to use raw sockets).
-
-Dependencies: Scapy library (pip install scapy).
-
-Network Setup: Best tested in a virtualized lab environment (e.g., GNS3, VMware, or VirtualBox).
+  * Sends the crafted packet directly through the selected network interface
 
 ---
 
-# 🚀 Usage
-Update the SRC_IP, DST_IP, and IFACE constants in the script.
+## 🧪 Educational Objectives
 
-Run the script with root privileges:
+This project helps to understand:
 
-`sudo python3 ping_spoofed.py`
+* **Packet crafting fundamentals**
 
-Note: In a successful spoofing scenario, you will typically see a timeout in the script. 
+  * Manual construction of IP and ICMP layers using Scapy
 
-This is because the target sends the "Echo Reply" to the spoofed IP address, not back to your machine. 
-To verify success, monitor the network from the spoofed host or use a network sniffer.
+* **Network security mechanisms**
+
+  * Testing defenses such as BCP 38 and uRPF (anti-spoofing protections)
+
+* **Traffic analysis techniques**
+
+  * Observing differences between logical and physical packet origins using tools like Wireshark
 
 ---
 
-# ⚠️ Disclaimer
-FOR EDUCATIONAL PURPOSES ONLY.
-This tool is intended for use in authorized penetration testing and controlled laboratory environments. Unauthorized spoofing of IP addresses on public or private networks is illegal and unethical.
+## 🛠️ Requirements
+
+* **Operating System:** Linux (Kali Linux recommended)
+* **Privileges:** Root access required (raw sockets)
+* **Dependencies:** Scapy
+
+Install Scapy:
+
+```bash id="p7x2kt"
+pip install scapy
+```
+
+* **Recommended environment:** Virtual lab (VirtualBox, VMware, GNS3)
+
+---
+
+## 🚀 Usage
+
+### 1. Configure the Script
+
+Update the following variables inside the script:
+
+* `SRC_IP` → Spoofed source IP address
+* `DST_IP` → Target destination IP
+* `IFACE` → Network interface
+
+---
+
+### 2. Run the Tool
+
+```bash id="c4m9vz"
+sudo python3 ping_spoofed.py
+```
+
+---
+
+## 📊 Expected Behavior
+
+In a successful spoofing scenario:
+
+* The script may show a **timeout response**
+* This is expected behavior
+
+### Why?
+
+The target system sends the ICMP Echo Reply to the **spoofed IP address**, not back to the attacker machine.
+
+### Verification Methods
+
+* Network sniffing (Wireshark)
+* Monitoring traffic on the spoofed host
+
+---
+
+## 📖 Learning Outcomes
+
+This project demonstrates:
+
+* Low-level packet injection using Scapy
+* IP header manipulation
+* Network-layer trust assumptions
+* Basic anti-spoofing mechanisms in modern networks
+* Real-world packet flow analysis
+
+---
+
+## ⚠️ Security Disclaimer
+
+This tool is intended strictly for educational and authorized testing purposes.
+
+* Do not use on networks without explicit permission
+* IP spoofing on unauthorized systems is illegal
+* Always operate in controlled lab environments
+
+---
+
+## 📄 License
+
+This project is released under the MIT License.
