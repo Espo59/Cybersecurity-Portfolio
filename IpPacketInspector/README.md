@@ -1,76 +1,128 @@
-# Scapy IP Packet Inspector
-A fundamental Python utility designed to demonstrate the internal structure of an Internet Protocol (IP) packet using the Scapy library.
-This tool is purely analytical; it creates and inspects packet objects in memory without transmitting any data over the network.
+# 📦 Scapy IP Packet Inspector
+
+A lightweight Python utility designed to demonstrate the internal structure of an **Internet Protocol (IP) packet** using the Scapy library.
+
+This tool is strictly analytical and does not transmit any network traffic.
 
 ---
 
-# 🔍 How It Works
-Scapy treats network protocols as Python objects, allowing for granular inspection of header fields that are usually handled automatically 
-by the operating system's TCP/IP stack.
+## 🔍 How It Works
 
-- **Layer Instantiation:** The script initializes an IP class instance, which represents the Layer 3 header of the OSI model.
+Scapy represents network protocols as Python objects, allowing direct inspection and manipulation of packet headers that are normally managed by the operating system’s TCP/IP stack.
 
-- **Field Mapping:** By setting the dst (destination) parameter, the script overrides the default loopback address while leaving other critical fields (like TTL, Flags, and Checksum) at their default or uncalculated states.
+### 🧱 Packet Construction
 
-- **Introspection (ls):** It utilizes Scapy's ls() (list) function to perform a deep inspection of the object, revealing the underlying structure of the IP header.
-
-- **Summary Generation:** It demonstrates how Scapy provides human-readable summaries of complex binary structures.
+* The script initializes an `IP()` object representing a Layer 3 IPv4 packet
+* The `dst` (destination) field is explicitly set by the user
+* All other fields (TTL, ID, flags, checksum, etc.) remain in their default state
 
 ---
 
-# 🛠 Features
-**Zero-Packet Transmission:** Safe to run in any environment as it performs no network I/O or raw socket operations.
+### 🔎 Introspection Process
 
-**Header Introspection:** Provides a clear view of all 14 fields of the IPv4 header (Version, IHL, TOS, Len, ID, etc.).
+The tool uses Scapy’s built-in inspection capabilities:
 
-**Field Access Demonstration:** Shows how to programmatically access and manipulate specific packet attributes.
-
-**Lightweight:** Minimal code footprint, focusing strictly on the educational aspect of Scapy's object-oriented approach.
-
----
-
-# 🧪 Educational Objectives
-This project was developed to explore:
-
-The anatomy of an IPv4 Header as defined in RFC 791.
-
-How Scapy abstracts complex network protocols into Pythonic objects.
-
-The difference between a default protocol state and a customized packet.
-
-Basic debugging techniques for network scripts using the ls() and summary() methods.
+* `ls()` → Displays all available fields of the IP layer
+* `summary()` → Provides a human-readable representation of the packet
+* Object introspection → Reveals internal structure of the IPv4 header
 
 ---
 
-# 🚀 Usage
-*Prerequisites:*
-Python 3.x
+## 🛠 Features
 
-*Scapy library installed:*
+* **Zero Network Transmission**
+  Fully safe: no packets are sent or received
 
-`pip install scapy`
+* **IPv4 Header Inspection**
+  Displays all 14 standard fields of an IP header, including:
 
-*Execution:*
-Since this script does not interact with the network interface, it does not require root/sudo privileges.
+  * Version
+  * IHL (Header Length)
+  * Type of Service (TOS)
+  * Total Length
+  * Identification
+  * Flags
+  * TTL
+  * Protocol
+  * Checksum
+  * Source / Destination IP
 
-`python3 ip_inspector.py`
+* **Field-Level Access**
+  Demonstrates how individual packet attributes can be accessed programmatically
 
----
-
-# 📋 Example Output
-The script will output the field breakdown of the IP layer, including:
-
-version: 4 (IPv4)
-
-ihl: Header length
-
-ttl: Time to Live
-
-proto: Protocol (default: hopopt)
-
-dst: Your specified destination IP
+* **Lightweight Design**
+  Minimal implementation focused purely on educational clarity
 
 ---
 
-# ⚠️ Disclaimer
-FOR EDUCATIONAL PURPOSES ONLY. This tool is intended for learning the basics of packet construction and the Scapy library. It is a foundational script for students and security researchers starting with network programming.
+## 🧪 Educational Objectives
+
+This project helps understand:
+
+* Structure of the IPv4 header (RFC 791)
+* How Scapy abstracts network protocols into Python objects
+* Difference between default vs. customized packet fields
+* Basic techniques for debugging network scripts
+* Relationship between raw packet structures and OS-level networking
+
+---
+
+## 🚀 Requirements
+
+* Python 3.x
+* Scapy
+
+Install dependency:
+
+```bash id="t4k8vp"
+pip install scapy
+```
+
+---
+
+## ▶️ Usage
+
+No root privileges are required since the script does not interact with the network stack.
+
+```bash id="q2m7xn"
+python3 ip_inspector.py
+```
+
+---
+
+## 📋 Example Output
+
+The script displays a structured breakdown of the IP layer, including:
+
+* `version` → IPv4 version
+* `ihl` → Header length
+* `ttl` → Time To Live
+* `proto` → Encapsulated protocol
+* `dst` → Destination IP address
+
+---
+
+## 📖 Learning Objectives
+
+This tool is intended for foundational understanding of:
+
+* IPv4 packet structure
+* Scapy object model
+* Network protocol abstraction
+* Packet inspection and debugging techniques
+* OSI Layer 3 fundamentals
+
+---
+
+## ⚠️ Disclaimer
+
+This project is intended for educational purposes only.
+
+It is designed to help students and researchers understand packet structures and should not be used for any malicious or unauthorized network activity.
+
+---
+
+## 📄 License
+
+This project is released under the MIT License.
+
