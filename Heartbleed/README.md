@@ -1,122 +1,140 @@
-# Heartbleed Exploit (CVE-2014-0160) – Python 3
+# 💔 Heartbleed Vulnerability Simulation (CVE-2014-0160) – Python 3
 
-A modern Python 3 implementation of the Heartbleed exploit, reconstructed from original Python 2 code and progressively enhanced into a fully automated tool.
+A Python 3 implementation and educational reconstruction of the **Heartbleed vulnerability (CVE-2014-0160)**, based on original Python 2 exploit concepts and adapted for modern environments.
 
----
-
-# 🔍 Project Overview
-
-The Heartbleed vulnerability allows an attacker to read the memory of a vulnerable server,
-potentially exposing sensitive data such as session cookies, usernames, and passwords.
-
-This project demonstrates:
-
-* How the exploit works at protocol level
-*  How memory over-read vulnerabilities leak sensitive data
-*  Why secure input validation is critical in cryptographic software
+This project demonstrates how a TLS implementation flaw can lead to unintended memory disclosure.
 
 ---
 
-# 🚀 Features
+## 🔍 Project Overview
 
-Fully compatible with Python 3
+The Heartbleed vulnerability affects certain versions of OpenSSL and allows a remote party to read portions of server memory beyond intended boundaries.
 
-Manual and automated exploit modes
+This project is designed to illustrate:
 
-Continuous attack loop with auto-reconnect
-
-Keyword-based memory filtering ("password")
-
-Clean extraction of sensitive data from memory leaks
-
-Designed for lab environments (e.g., SEED Labs)
+* How TLS heartbeat extensions operate
+* How memory over-read vulnerabilities occur
+* The impact of missing bounds validation in secure protocols
+* The importance of secure cryptographic implementation practices
 
 ---
 
-# 🧩 Versions
-## 🧪 heartv2.py — Initial Port
-First stable Python 3 version
+## 🚀 Features
 
-*Implements:*
-
-TLS Client Hello handshake
-
-Single Heartbeat request
-
-Outputs raw leaked memory (hex + ASCII)
-
-## ⚙️ heartv3.py — Improved & Filtered
-*Implements:*
-
-Adds burst mode (5 heartbeats per run)
-
-Increases probability of capturing useful memory
-
- Filters output when "password" is detected
- 
-## 🤖 heartbleed3.py — Final Version
-*Implements:*
-
-Fully automated exploit
-
-Continuous loop (while True)
-
-Automatic reconnection if target resets connection
-
-Extracts readable credential fragments from leaked memory
+* Python 3 compatible implementation
+* Manual and semi-automated testing modes
+* Continuous request simulation (for stability testing in lab environments)
+* Basic filtering of leaked memory output for analysis purposes
+* Designed for controlled cybersecurity labs (e.g., SEED Labs)
 
 ---
 
-# 🛠️ Technical Details
+## 🧩 Project Versions
+
+### 🧪 `heartv2.py` – Initial Implementation
+
+* Establishes TLS handshake manually
+* Sends a single crafted heartbeat request
+* Outputs raw memory response (hex + ASCII representation)
+
+---
+
+### ⚙️ `heartv3.py` – Enhanced Testing Version
+
+* Sends multiple heartbeat requests per execution cycle
+* Improves probability of capturing meaningful memory data
+* Adds simple keyword filtering for analysis (`e.g. "password"`)
+
+---
+
+### 🤖 `heartbleed3.py` – Automated Simulation Mode
+
+* Continuous execution loop for repeated testing
+* Automatic reconnection handling
+* Structured extraction of readable memory fragments for analysis
+
+---
+
+## 🛠️ Technical Details
 
 * Low-level socket communication
-* Manual crafting of TLS packets
-* Custom Heartbeat request implementation
-* Hex/ASCII parsing of leaked memory
-* No reliance on high-level SSL libraries
+* Manual TLS packet construction
+* Custom implementation of Heartbeat request structure
+* Hex and ASCII parsing of server responses
+* No dependency on high-level SSL abstractions
 
 ---
 
-# ⚙️ Prerequisites
-Python 3.x
+## ⚙️ Requirements
 
-Root/Sudo privileges (may be required depending on environment)
+* Python 3.x
+* Root/Sudo privileges (depending on network configuration)
+* A vulnerable or intentionally misconfigured test environment
 
-A vulnerable target (e.g., SEED Labs Ubuntu 12 VM)
-
-Usage
-
-Replace [TARGET_IP] with your target system.
-
-## *Run Version 2:*
-
-`sudo python3 heartv2.py [TARGET_IP]`
-
-## *Run Version 3:*
-
-`sudo python3 heartv3.py [TARGET_IP]`
-
-## *Run Final Version (Automated):*
-
-`sudo python3 heartbleed3.py [TARGET_IP]`
+  * Example: SEED Labs VM
 
 ---
 
-# 📚 Educational Purpose
+## 🚀 Usage
 
-This project is intended for:
+Replace `[TARGET_IP]` with your lab target.
 
-Cybersecurity students 👨‍💻👩‍💻
+### Run Initial Version
 
-Ethical hacking labs 🧪
-
-Understanding real-world vulnerabilities 🔍
-
-It is particularly suited for environments like SEED Labs.
+```bash id="k8q1mp"
+sudo python3 heartv2.py [TARGET_IP]
+```
 
 ---
 
-# ⚠️ Disclaimer
+### Run Enhanced Version
 
-This project is for educational and research purposes only. Do NOT use these tools on systems without explicit authorization. 
-Unauthorized access to computer systems is illegal and may result in criminal charges.
+```bash id="r4t9vz"
+sudo python3 heartv3.py [TARGET_IP]
+```
+
+---
+
+### Run Automated Simulation
+
+```bash id="x6n3cs"
+sudo python3 heartbleed3.py [TARGET_IP]
+```
+
+---
+
+## 📖 Educational Objectives
+
+This project is intended to support learning in:
+
+* TLS/SSL protocol internals
+* Memory safety vulnerabilities
+* Secure coding practices in cryptographic libraries
+* Real-world impact of software implementation flaws
+* Cybersecurity lab experimentation
+
+---
+
+## 🧪 Recommended Environment
+
+This project should only be executed in controlled environments such as:
+
+* SEED Labs
+* Virtualized vulnerable systems
+* Isolated cybersecurity training networks
+
+---
+
+## ⚠️ Security Disclaimer
+
+This project is strictly for educational and research purposes.
+
+* Do not use against systems without explicit authorization
+* Unauthorized access to systems is illegal
+* Always operate within controlled lab environments
+
+---
+
+## 📄 License
+
+This project is released under the MIT License.
