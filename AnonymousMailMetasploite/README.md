@@ -1,81 +1,124 @@
-# SMTP Automation Tool for Metasploitable
+# 📧 SMTP Automation Tool (Metasploitable Lab)
 
-A lightweight Python utility designed for security testing and educational purposes. This tool automates the process of sending emails via an SMTP service, specifically tailored for environments like **Metasploitable** where SMTP (Port 25) might be open and lacks strict authentication.
+A lightweight Python utility designed for educational and security testing purposes.
+This tool automates the process of sending emails via SMTP, specifically in vulnerable lab environments such as Metasploitable where authentication may be absent or misconfigured.
 
----
-
-# 📌 Overview
-
-This tool allows users to interactively construct and send emails through a target SMTP server. It is particularly useful for demonstrating:
-* How the SMTP protocol works without authentication.
-* Email spoofing concepts in vulnerable environments.
-* Basic network communication using Python's `smtplib`.
+> ⚠️ This project is intended for use in controlled lab environments only.
 
 ---
 
-# 🚀 Features
+## 📌 Overview
 
-* **Interactive CLI**: Prompts for Sender, Receiver, Subject, and multi-line Body.
-* **MIME Support**: Uses `MIMEMultipart` to ensure emails are correctly formatted and readable by mail clients.
-* **Multi-line Input**: Supports entering complex message bodies until an EOF character is received.
-* **Error Handling**: Gracefully manages connection refusals and network timeouts.
+This tool allows users to interactively construct and send emails through a target SMTP server.
+
+It is designed to demonstrate:
+
+* How the SMTP protocol operates without authentication
+* Email spoofing concepts in insecure environments
+* Basic network communication using Python’s built-in libraries
 
 ---
 
-# 🛠 Prerequisites
+## 🚀 Features
+
+* Interactive CLI for email creation (sender, recipient, subject, body)
+* Support for MIME formatting using `MIMEMultipart`
+* Multi-line message input with EOF termination
+* Basic error handling for connection issues and timeouts
+
+---
+
+## 🛠️ Requirements
 
 * Python 3.x
-* A target environment (e.g., a Metasploitable VM or a local lab) with an SMTP service running on port 25.
+* A lab environment with an SMTP service running (e.g., Metasploitable on port 25)
 
-No external libraries are required as it uses standard Python modules (`smtplib`, `email`).
+No external dependencies are required. The script uses only standard Python libraries:
+
+* `smtplib`
+* `email`
 
 ---
 
-# 📋 Usage
+## ⚙️ Configuration
 
-### 1. Configure the Target: 
+Before running the script, update the target IP address:
 
-Open `mail_meta.py` and update the `target_ip` variable with the IP address of your Metasploitable machine.
+```python id="u3r7zn"
+target_ip = "192.168.xxx.xxx"  # Replace with your target machine IP
+```
 
-   ```python
-   target_ip = "192.168...."  # Change this to your target IP
-   ```
+---
 
-Run the Script:
+## 📋 Usage
 
-```Bash
+### 1. Run the Script
+
+```bash id="m7c2yf"
 python3 mail_meta.py
 ```
 
-Follow the Prompts:
+---
 
-* From: Enter the sender's address (e.g., admin@internal.lab).
+### 2. Follow the Interactive Prompts
 
-* To: Enter the recipient's username (e.g., root or sys).
+* **From:** Sender email (e.g., `admin@internal.lab`)
+* **To:** Recipient username (e.g., `root`, `sys`)
+* **Subject:** Email subject
+* **Message:**
 
-* Subject: Enter a clear subject line.
+Type your message body. To send:
 
-* Message: Type your message. Press Ctrl+D (Linux/Mac) or Ctrl+Z (Windows) followed by Enter to send.
+* Linux / macOS → `Ctrl + D`
+* Windows → `Ctrl + Z` + Enter
 
 ---
 
-# 🛡 Security Warning
+## 📖 How It Works
 
-### IMPORTANT: This tool is for educational and authorized security testing purposes only.
+The script connects to the target SMTP service on port 25 and performs a standard SMTP transaction:
 
-Never use this tool on networks or systems you do not own or have explicit permission to test.
-
-Sending spoofed emails can be illegal and unethical depending on the context.
-
-It is intended to be used in isolated lab environments (like Metasploitable) to understand service vulnerabilities.
+1. Establishes a connection to the server
+2. Builds a MIME-compliant email message
+3. Sends SMTP commands (`MAIL FROM`, `RCPT TO`, `DATA`)
+4. Terminates the session using `QUIT`
 
 ---
 
-# 📖 How it Works
+## 🧪 Learning Objectives
 
-The script establishes a raw TCP connection to the target on port 25. It follows the standard SMTP handshake:
+This project helps reinforce:
 
-Connects to the server.
+* Understanding of SMTP protocol behavior
+* Awareness of insecure mail server configurations
+* Practical scripting for network interaction
+* Basic concepts of email spoofing in lab environments
+
+---
+
+## 🛡️ Security Notice
+
+This tool is intended strictly for educational and authorized testing purposes.
+
+* Do not use on systems without explicit permission
+* Do not attempt email spoofing outside controlled environments
+* Misuse may violate laws and ethical guidelines
+
+---
+
+## 📈 Future Improvements
+
+* Add authentication support (LOGIN / TLS)
+* Implement logging of SMTP responses
+* Add input validation and sanitization
+* Extend to support attachments
+
+---
+
+## 📄 License
+
+This project is released under the MIT License.
+
 
 Packages the user input into a MIME-compliant string.
 
