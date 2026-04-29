@@ -81,6 +81,12 @@ This lab highlights important real-world risks:
 
 ---
 
+## 🛡️ Security Analysis
+
+A defensive security analysis is included in `/docs/security_analysis.md`, covering risks, attack surfaces, and mitigation strategies observed during the lab.
+
+---
+
 ## ⚠️ Ethical & Legal Disclaimer
 
 This project is intended strictly for **educational and defensive security research**.
