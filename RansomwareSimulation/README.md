@@ -1,139 +1,141 @@
-# 🔐 Remote Encryption & Incident Response Simulation Lab (Educational PoC)
+# Ransomware Simulation & Incident Response Lab
 
-This repository contains a **Proof of Concept (PoC)** designed to simulate the technical behavior of a remote file encryption scenario in a controlled environment.
-
-The project is intended for educational purposes to help understand **Command & Control (C2) communication**, **symmetric encryption workflows**, and **incident response behaviors** in compromised systems.
-
----
-
-## 🎓 Educational Objectives
-
-This lab focuses on understanding:
-
-* **Command & Control (C2) Architecture**
-  How remote systems can receive and execute structured instructions
-
-* **Symmetric Encryption Systems**
-  Use of Fernet (AES-based encryption) for secure data transformation
-
-* **Network Communication**
-  Persistent TCP connections and basic multi-threaded socket handling
-
-* **Security Incident Simulation**
-  Behavioral artifacts such as file modification indicators and warning notes
+![Malware](https://img.shields.io/badge/Malware-Ransomware-red?style=for-the-badge)
+![SOC](https://img.shields.io/badge/SOC-Incident_Response-blue?style=for-the-badge)
+![Detection](https://img.shields.io/badge/Detection-Engineering-green?style=for-the-badge)
+![Python](https://img.shields.io/badge/Tool-Python-yellow?style=for-the-badge)
 
 ---
 
-## 🛠️ Project Components
+## 🧠 Executive Summary
 
-### 🖥️ Controller (`controller.py`)
+This project simulates a ransomware attack lifecycle in a controlled environment, demonstrating how files can be encrypted and how such behavior is detected and analyzed from a SOC / Incident Response perspective.
 
-Acts as the central management interface.
-
-Responsibilities:
-
-* Establishes TCP connection with the target node
-* Generates a session encryption key
-* Provides an interactive CLI for remote operations
-* Sends structured commands to the connected node
+The objective is to understand:
+- How ransomware operates at system level
+- What behavioral indicators it generates
+- How SOC teams detect early-stage encryption activity
+- How incident response procedures are applied
 
 ---
 
-### 💻 Worker Node (`victim.py`)
+## ⚔️ Attack Lifecycle (Kill Chain)
 
-Simulated endpoint system in a controlled environment.
+The ransomware simulation follows a simplified attack chain:
 
-Responsibilities:
-
-* Listens for incoming controller connections
-* Handles requests using multi-threaded processing
-* Recursively processes target directories
-* Applies encryption or decryption operations
-* Generates or removes a simulated incident indicator file
+1. Initial execution (`client.py`)
+2. Payload delivery to target system (`victim.py`)
+3. File enumeration on victim machine
+4. Encryption of targeted files
+5. Potential key exchange simulation (remote component)
+6. Impact phase (data becomes inaccessible)
 
 ---
 
-## 🚀 Lab Setup & Execution
+## 🧪 Behavioral Analysis
 
-### 📦 Prerequisites
+During execution, the ransomware demonstrates:
 
-* Python 3.x
-* cryptography library
+- File system traversal
+- Bulk file modification
+- File extension changes (if implemented)
+- High-frequency write operations
+- Encryption-like transformation patterns
 
-Install dependency:
+📁 Detailed behavior analysis is documented in `/docs/behavior.md`
 
-```bash id="q9m2xp"
-pip install cryptography
+---
+
+## 🧾 Indicators of Compromise (IOCs)
+
+This simulation generates several detectable IOCs:
+
+- Unusual file modification spikes
+- Rapid disk write activity
+- New or modified encrypted files
+- Suspicious Python process behavior
+- Network communication patterns (if remote key exchange is used)
+
+📁 See `/docs/indicators.md`
+
+---
+
+## 🔍 Detection (SOC Perspective)
+
+SOC teams can detect ransomware activity through:
+
+### Endpoint Indicators:
+- Mass file changes in short time window
+- High CPU/disk usage spikes
+- Unknown process executing file encryption routines
+
+### Behavioral Detection:
+- Ransomware-like file access patterns
+- Ransom note creation (if implemented)
+- Abnormal file entropy increase
+
+### Security Tools:
+- EDR behavioral analytics
+- SIEM correlation rules
+- File integrity monitoring systems (FIM)
+
+---
+
+## 🛡 Incident Response & Mitigation
+
+If ransomware activity is detected:
+
+### Immediate Response:
+- Isolate affected endpoint from network
+- Stop malicious processes
+- Preserve forensic evidence
+
+### Recovery:
+- Restore from backups
+- Verify file integrity
+- Analyze attack vector
+
+### Prevention:
+- Endpoint protection (EDR/XDR)
+- Least privilege enforcement
+- Regular offline backups
+- Email and execution filtering
+
+---
+
+## 📁 Project Structure
+
+```text
+RansomwareSimulation/
+├── client.py
+├── victim.py
+├── docs/
+│ ├── behavior.md
+│ ├── detection.md
+│ └── indicators.md
+└── README.md
 ```
 
 ---
 
-### 🧪 Step 1 — Start Worker Node
+## 🧠 Key Learning Outcomes
 
-Run on the target system (e.g., Linux VM):
-
-```bash id="k3n8vz"
-python3 victim.py
-```
-
-The node will start listening on port **8080**.
+- Ransomware kill chain understanding
+- File system manipulation at application level
+- SOC detection strategies for malware behavior
+- Incident response lifecycle
+- IOC generation and analysis
 
 ---
 
-### 🧪 Step 2 — Start Controller
+## 📌 Disclaimer
 
-Run on the control system:
-
-```bash id="m7c4ql"
-python3 controller.py
-```
-
-Enter the IP address of the worker node to establish a connection.
+This project is strictly for educational and cybersecurity research purposes in controlled environments. It does not implement real-world malicious payloads.
 
 ---
 
-### ⚙️ Available Operations
+## 🏷️ Tags
 
-* **Encryption Mode**
-  Select a target directory to simulate file encryption on the remote system
+`Ransomware` · `Malware Simulation` · `Incident Response` · `SOC Analysis` · `File Encryption` · `Threat Detection` · `Cybersecurity Lab`
 
-* **Decryption Mode**
-  Restore previously modified files using the same session key
-
----
-
-## 📖 Learning Outcomes
-
-This project demonstrates:
-
-* Fundamentals of C2 communication models
-* Practical implementation of symmetric cryptography (Fernet / AES)
-* Remote task execution over TCP sockets
-* File system traversal and batch processing
-* Basic simulation of security incident workflows
-
----
-
-## 🧪 Recommended Environment
-
-This project should only be executed in:
-
-* Isolated virtual machines
-* Cybersecurity training labs
-* Controlled test networks (e.g., Metasploitable environments)
-
----
-
-## ⚠️ Legal & Ethical Disclaimer
-
-This project is intended strictly for **educational and research purposes only**.
-
-* Do not use on systems without explicit authorization
-* Unauthorized execution on real systems is illegal
-* Always operate within controlled lab environments
-
----
-
-## 📄 License
-
-This project is released under the MIT License.
+the MIT License.
