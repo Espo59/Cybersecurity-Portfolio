@@ -1,132 +1,131 @@
-# 🌐 ARP Poisoning & Man-in-the-Middle (MitM) Simulation
+# ARP Spoofing (MITM Attack Simulation & Detection Lab)
 
-This repository contains a Python-based implementation of an ARP Spoofing attack, developed for educational purposes to demonstrate how the Address Resolution Protocol (ARP) can be manipulated within a local network.
-
-> ⚠️ This project is intended strictly for use in controlled lab environments.
-
----
-
-## 🔍 Overview
-
-ARP Spoofing is a technique in which an attacker sends forged ARP messages within a local network to associate their MAC address with the IP address of another host (typically the default gateway).
-
-This allows the attacker to intercept, monitor, and potentially modify network traffic, effectively positioning themselves as a **Man-in-the-Middle (MitM)**.
+![Network Security](https://img.shields.io/badge/Network-Security-red?style=for-the-badge&logo=proxmox)
+![MITM](https://img.shields.io/badge/Attack-MITM-orange?style=for-the-badge)
+![Scapy](https://img.shields.io/badge/Tool-Scapy-blue?style=for-the-badge)
+![Detection](https://img.shields.io/badge/SOC-Detection-green?style=for-the-badge)
 
 ---
 
-## 🚀 Features
+## 🧠 Executive Summary
 
-* Bi-directional ARP poisoning (victim ↔ router)
-* Automatic IPv4 forwarding management to maintain connectivity
-* Graceful network restoration after interruption (Ctrl + C)
-* Real-time packet counter for monitoring attack activity
+This project simulates an ARP Spoofing (Man-in-the-Middle) attack in a controlled environment using Scapy.
+
+The objective is to demonstrate:
+- How ARP cache poisoning enables traffic interception
+- How a MITM position is established at network level
+- How this attack can be detected from a SOC perspective
+- How mitigation techniques can prevent ARP-based attacks
 
 ---
 
-## 🛠️ Requirements
+## ⚔️ Attack Overview
 
-* Linux-based OS (Kali Linux or Parrot OS recommended)
-* Python 3.x
-* Scapy library
+ARP Spoofing works by exploiting the lack of authentication in the ARP protocol.
 
-Install dependencies:
+An attacker sends forged ARP replies to:
+- Associate their MAC address with the victim’s IP
+- Poison the ARP cache of target devices
+- Intercept traffic between victim and gateway
 
-```bash id="w2zv7n"
-pip install scapy
+This results in a Man-in-the-Middle (MITM) position.
+
+---
+
+## 🧪 Attack Implementation
+
+The attack is implemented using Scapy to:
+
+- Continuously send spoofed ARP responses
+- Impersonate the network gateway
+- Redirect traffic through the attacker machine
+
+Script:
+- `arp_spoof_and_leave.py`
+
+---
+
+## 🧾 Evidence (Network Behavior)
+
+During the attack, the following behaviors can be observed:
+
+- ARP cache changes on victim machine
+- Gateway IP mapped to attacker MAC address
+- Traffic routed through attacker system
+- Increased ARP reply frequency
+
+📁 Screenshots and packet captures can be analyzed using Wireshark to observe:
+- ARP reply anomalies
+- MAC address inconsistencies
+- Traffic redirection patterns
+
+---
+
+## 🔍 Detection (SOC Perspective)
+
+ARP Spoofing can be detected using:
+
+### Network Indicators:
+- Multiple ARP replies for the same IP from different MACs
+- Sudden changes in ARP cache entries
+- Gateway MAC address inconsistency
+
+### Detection Techniques:
+- ARP inspection (Dynamic ARP Inspection - DAI)
+- Network monitoring tools (Wireshark, Zeek)
+- IDS rules detecting ARP anomalies
+
+### SOC Correlation:
+- Unusual L2 traffic patterns
+- Gateway impersonation detection
+- Cross-device MAC/IP mismatches
+
+---
+
+## 🛡 Mitigation
+
+To prevent ARP spoofing attacks:
+
+- Enable Dynamic ARP Inspection (DAI)
+- Use static ARP entries for critical systems
+- Segment network (VLAN isolation)
+- Monitor ARP tables for anomalies
+- Use encrypted protocols (HTTPS, SSH) to reduce MITM impact
+
+---
+
+## 📁 Project Structure
+
+```text
+ArpSpoofAndLeave/
+├── arp_spoof_and_leave.py
+├── docs/
+│ ├── attack_analysis.md
+│ ├── detection.md
+│ └── mitigation.md
+└── README.md
 ```
 
-> ⚠️ Root privileges are required to craft and send raw packets.
+---
+
+## 🧠 Key Learning Outcomes
+
+- ARP protocol weaknesses and exploitation
+- Man-in-the-Middle attack mechanics
+- Network packet manipulation using Scapy
+- SOC-level detection of L2 attacks
+- Defensive mitigation strategies in enterprise networks
 
 ---
 
-## ⚙️ Configuration
+## 📌 Disclaimer
 
-Before running the script, update the following variables with your lab environment details:
-
-```python id="n9q3xt"
-VICTIM_IP = "..."
-VICTIM_MAC = "..."
-
-ROUTER_IP = "..."
-ROUTER_MAC = "..."
-
-ATTACKER_MAC = "..."
-```
+This project is for educational purposes only and demonstrates a controlled network security simulation. It must not be used on unauthorized networks.
 
 ---
 
-## 📋 Usage
+## 🏷️ Tags
 
-### 1. Run the Script
-
-```bash id="b8g4kl"
-sudo python3 arp_spoofer.py
-```
-
----
-
-### 2. Monitor the Traffic
-
-Use Wireshark on the attacker machine to observe intercepted traffic flowing between the victim and the router.
-
----
-
-## 📖 How It Works
-
-The script performs the following steps:
-
-1. Sends forged ARP replies to the victim (spoofing the router)
-2. Sends forged ARP replies to the router (spoofing the victim)
-3. Enables IP forwarding to relay traffic transparently
-4. Maintains the poisoned state by continuously sending packets
-5. Restores the original ARP tables upon termination
-
----
-
-## 🧪 Learning Objectives
-
-This project helps develop understanding of:
-
-* The stateless nature of the ARP protocol
-* Lack of authentication in ARP communications
-* Kernel-level network forwarding (`sysctl`)
-* Real-world MitM attack mechanics
-* Defensive measures such as:
-
-  * Dynamic ARP Inspection (DAI)
-  * Static ARP entries
-  * Network segmentation
-
----
-
-## 🛡️ Security Notice
-
-This tool is intended for educational and authorized testing only.
-
-* Do not use on networks without explicit permission
-* Unauthorized interception of network traffic is illegal
-* Always operate within a controlled lab environment
-
----
-
-## 📈 Future Improvements
-
-* Add packet sniffing and logging capabilities
-* Integrate basic traffic filtering
-* Support automated network discovery
-* Implement detection/defense simulation
-
----
-
-## ❗ Disclaimer
-
-This project is part of a cybersecurity learning path focused on ethical hacking and defensive awareness.
-
-All experiments were conducted in isolated lab environments.
-The author does not support or condone misuse of this tool.
-
----
-
-## 📄 License
+`ARP Spoofing` · `MITM Attack` · `Network Security` · `Scapy` · `Traffic Interception` · `SOC Detection` · `LAN Security`
 
 This project is released under the MIT License.
