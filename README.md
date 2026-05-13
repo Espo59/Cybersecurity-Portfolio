@@ -1,69 +1,107 @@
 # 🔐 Cybersecurity Portfolio
 
-This repository contains a collection of hands-on Python-based cybersecurity exercises developed in a controlled lab environment.
+This repository contains a structured collection of hands-on cybersecurity labs developed in isolated and controlled environments.
 
-The purpose of this project is to demonstrate practical understanding of core cybersecurity concepts, including network analysis, traffic inspection, and basic security testing techniques.
+The focus of this project is the practical study of offensive security techniques, network exploitation, adversary simulation, and basic detection methodologies.
 
-> ⚠️ All activities were performed in isolated lab environments for educational and ethical purposes only.
-
----
-
-## 🧪 Lab Environment
-
-The experiments were conducted in a virtualized lab including:
-
-* Kali Linux (attacker machine)
-* Lubuntu (target system)
-* Windows 7 (legacy target)
-* Metasploitable (intentionally vulnerable system)
+All activities were performed strictly within authorized virtualized environments for educational and research purposes only.
 
 ---
 
-## 🛠️ Tools & Technologies
+# 🧪 Lab Environment
 
-* Wireshark – network traffic analysis
-* Bettercap – network reconnaissance and MITM simulations
-* Python – scripting and automation
-* VirtualBox – lab virtualization
+The lab infrastructure includes multiple operating systems and intentionally vulnerable environments:
 
----
-
-## 📌 Key Focus Areas
-
-* Network traffic monitoring and packet analysis
-* Simulation of basic attacks in controlled environments
-* Cross-platform script testing (Linux & Windows)
-* Identification and understanding of common vulnerabilities
-* Hands-on practice with legacy and vulnerable systems
+- Kali Linux (attack platform)
+- Windows 7 / Windows 10 (target systems)
+- Ubuntu / Lubuntu / Debian
+- Metasploitable (vulnerable services)
+- FreeBSD / CentOS / Alpine (additional environments)
+- VirtualBox (virtualization layer)
 
 ---
 
-## 📈 Objectives
+# 🛠️ Tools & Technologies
 
-This repository is part of my continuous learning journey in cybersecurity, with a focus on developing practical skills relevant to:
+## Network & Reconnaissance
+- Nmap
+- Masscan
+- Wireshark
+- Bettercap
+- Maltego
 
-* SOC Analyst roles
-* Junior Cybersecurity Analyst positions
-* Blue Team fundamentals
+## Web Security
+- Burp Suite
+- OWASP ZAP
+- SQLMap
+
+## Exploitation & Payloads
+- Metasploit Framework
+- msfvenom
+- Veil
+- Shellter
+
+## Credential Access
+- Hashcat
+- John the Ripper
+- Hydra
+- Mimikatz
+- Responder
+
+## Adversary Simulation & C2
+- CALDERA
+- Covenant
+- Starkiller
+
+## Scripting & Automation
+- Python
+- PowerShell
+- Bash
 
 ---
 
-## 🚀 Future Improvements
+# 📌 Key Focus Areas
 
-* Add detection-oriented scripts (log analysis, alerting)
-* Expand network attack simulations and defenses
-* Include documentation for each project/module
-* Integrate basic threat detection scenarios
-
----
-
-## ❗ Disclaimer
-
-This repository is intended for educational purposes only.
-All tests and experiments were conducted in a controlled and authorized environment.
+- Network traffic analysis and protocol inspection
+- Offensive security techniques in controlled environments
+- Credential access and authentication security concepts
+- Malware behavior simulation and analysis
+- Reverse engineering (Android and binary analysis)
+- Adversary simulation and C2 frameworks
+- Detection-oriented thinking (SOC perspective)
 
 ---
 
-## 📄 License
+# 🎯 Objectives
 
-This project is released under the MIT License.
+This repository reflects a continuous progression toward roles such as:
+
+- SOC Analyst
+- Junior Security Analyst
+- Blue Team / Detection Engineering entry roles
+- Purple Team fundamentals exposure
+
+---
+
+# 🧠 Adversary Simulation (Course Work)
+
+During the course, adversary emulation tools and frameworks were explored, including:
+
+- CALDERA — MITRE ATT&CK adversary emulation platform used for attack simulation exercises
+- Covenant — command and control framework for adversary simulation
+- Starkiller — graphical user interface for Empire-based operations
+
+---
+
+# 🚀 Future Improvements
+
+- Centralized detection and telemetry project (SOC-style lab)
+- ATT&CK mapping for existing simulations
+- Log analysis and alerting scenarios (Sysmon / SIEM concepts)
+- Consolidation of attack chains into structured scenarios
+
+---
+
+# ❗ Disclaimer
+
+All activities were conducted in isolated and authorized environments for educational purposes only.
